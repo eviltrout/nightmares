@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://models/arch.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://textures/arch-ao.png" type="Texture" id=2]
+[ext_resource path="res://textures/arch-roughness.png" type="Texture" id=3]
+[ext_resource path="res://textures/arch-albedo.png" type="Texture" id=4]
+[ext_resource path="res://textures/arch-metal.png" type="Texture" id=5]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 4 )
+metallic = 0.16
+metallic_specular = 0.62
+metallic_texture = ExtResource( 5 )
+roughness = 0.46
+roughness_texture = ExtResource( 3 )
+ao_enabled = true
+ao_light_affect = 0.07
+ao_texture = ExtResource( 2 )
+ao_on_uv2 = false
+ao_texture_channel = 0
+
+[node name="Arch" type="Spatial"]
+
+[node name="arch" type="MeshInstance" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0 )
+use_in_baked_light = true
+mesh = ExtResource( 1 )
+material/0 = SubResource( 1 )

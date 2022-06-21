@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://models/beam.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/beam.gd" type="Script" id=2]
+[ext_resource path="res://audio/impact-metal.wav" type="AudioStream" id=3]
+[ext_resource path="res://audio/glass.wav" type="AudioStream" id=4]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_do_not_receive_shadows = true
+albedo_color = Color( 1, 0.984314, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.937255, 0, 1 )
+emission_energy = 3.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.1
+
+[sub_resource type="SpatialMaterial" id=5]
+flags_unshaded = true
+albedo_color = Color( 0.898039, 1, 0, 1 )
+
+[sub_resource type="SphereMesh" id=4]
+material = SubResource( 5 )
+radius = 0.5
+height = 1.0
+radial_segments = 5
+rings = 5
+
+[node name="Beam" type="Spatial"]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="beam" type="MeshInstance" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = ExtResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="BeamArea" type="Area" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape" parent="BeamArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00977996, -0.0285395 )
+shape = SubResource( 3 )
+
+[node name="Explosion" type="CPUParticles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0317631 )
+generate_lightmap = false
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource( 4 )
+spread = 180.0
+gravity = Vector3( 0, -9.8, 5 )
+initial_velocity = 3.0
+scale_amount = 0.05
+
+[node name="MetalHit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="GlassHit" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+
+[connection signal="body_entered" from="BeamArea" to="." method="_on_Area_body_entered"]

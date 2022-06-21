@@ -1,0 +1,106 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/hall01.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://textures/crab-nebula.png" type="Texture" id=3]
+[ext_resource path="res://scenes/panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemy-spawn.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/hall02.tscn" type="PackedScene" id=6]
+
+[sub_resource type="PanoramaSky" id=2]
+panorama = ExtResource( 3 )
+
+[sub_resource type="Environment" id=1]
+background_mode = 2
+background_sky = SubResource( 2 )
+background_sky_orientation = Basis( 0.998182, -0.0600443, 0.00528298, 0.0600721, 0.99818, -0.00528305, -0.00495615, 0.00559081, 0.999972 )
+background_energy = 0.62
+ambient_light_color = Color( 0.152941, 0.152941, 0.435294, 1 )
+ambient_light_energy = 2.75
+ambient_light_sky_contribution = 0.33
+fog_enabled = true
+fog_color = Color( 0, 0, 0, 1 )
+fog_depth_begin = 0.0
+fog_depth_end = 15.0
+fog_depth_curve = 2.46229
+tonemap_exposure = 1.38
+glow_enabled = true
+glow_intensity = 0.26
+glow_strength = 1.1
+glow_high_quality = true
+
+[sub_resource type="Animation" id=3]
+resource_name = "SpaceRotation"
+length = 120.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:background_sky_rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 118.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 3.444 ), Vector3( 359, 359, 3.444 ) ]
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.39689, 2.17731, 21.4093 )
+light_color = Color( 1, 0.996078, 0.807843, 1 )
+light_energy = 0.56
+shadow_enabled = true
+
+[node name="Hall" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Hall2" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0 )
+
+[node name="Hall3" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 0 )
+
+[node name="Hall4" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0 )
+
+[node name="Hall5" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 0 )
+
+[node name="Panel3" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 1, 3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, 4.37114e-08, -35, 1.05, 1 )
+
+[node name="Panel4" parent="." instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 1, 3.82137e-15, -4.37114e-08, 1.91069e-15, -1, -1, -4.37114e-08, 4.37114e-08, -35, 1.05, -1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "SpaceRotation"
+anims/SpaceRotation = SubResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.705383, 0.7, 0 )
+
+[node name="EnemySpawn3" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.120812, 0.0158001, -0.99255, 0.992652, 0.00888565, -0.120683, 0.00691266, -0.999835, -0.0167577, -8.35676, 0.992258, 1.92838 )
+
+[node name="EnemySpawn4" parent="." instance=ExtResource( 5 )]
+transform = Transform( -8.78107e-08, 4.29269e-08, -1, -0.99996, -0.0089534, 8.74228e-08, -0.00895341, 0.99996, 4.37114e-08, -7.90828, 0.992258, -1.90099 )
+
+[node name="EnemySpawn" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.120812, 0.0158002, -0.99255, 0, -0.999873, -0.0159168, -0.992675, -0.00192295, 0.120797, -12.211, 2.00584, 0.440519 )
+
+[node name="EnemySpawn6" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.120812, 0.0158002, -0.99255, 0, -0.999873, -0.0159168, -0.992675, -0.00192295, 0.120797, -12.211, 2.01391, -0.354953 )
+
+[node name="EnemySpawn2" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.120812, 0.0158002, -0.99255, 0, -0.999873, -0.0159168, -0.992675, -0.00192295, 0.120797, -12.4593, 2.00584, -0.902534 )
+
+[node name="EnemySpawn5" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.0102275, 0, -0.999948, 0, 1, 0, 0.999948, 0, 0.0102275, -3.96042, 0.0514467, 0.761901 )
+
+[node name="Spatial" parent="." instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -24, 0, 1 )

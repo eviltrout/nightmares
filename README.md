@@ -3,7 +3,7 @@
 This is a companion repo for a YouTube video I made about a game I 
 made when I was 13 years old, and my efforts to improve it.
 
-[I remastered by 30 year-old DOS game!](https://www.youtube.com/watch?v=08RveywBXl4)
+[I remastered my 30 year-old DOS game!](https://www.youtube.com/watch?v=08RveywBXl4)
 
 ## Components
 
